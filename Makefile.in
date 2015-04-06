@@ -1,0 +1,15 @@
+
+all: src/level1.h src/level2.h src/level2.cpp
+	ino build
+
+src/level2.cpp:
+	cp $(BRLTTY_UOBP_DRIVER_DIR)/level2.c src/level2.cpp
+
+src/level2.h:
+	cp $(BRLTTY_UOBP_DRIVER_DIR)/level2.h src/level2.h
+
+src/level1.h:
+	cp $(BRLTTY_UOBP_DRIVER_DIR)/level1.h src/level1.h
+
+install: 
+	ino upload

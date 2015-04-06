@@ -1,0 +1,5 @@
+#!/bin/sh
+echo "Please enter the path to the brltty UOBP driver source directory."
+read -r uobpSourceDir
+echo BRLTTY_UOBP_DRIVER_DIR = $uobpSourceDir > Makefile
+cat Makefile.in >> Makefile

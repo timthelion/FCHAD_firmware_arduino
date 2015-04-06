@@ -1,0 +1,35 @@
+#define NUM_EVENT_HANDLERS 6
+EventHandler eventHandlers[NUM_EVENT_HANDLERS];
+unsigned long int time;
+
+void initEventHandlers(){
+ //PWM of solenoids LOW.
+ eventHandlers[0].start=0L;
+ eventHandlers[0].phase=PWM_PHASE;
+ eventHandlers[0].onEvent=&displayNothing;
+ //PWM of solenoids HIGH
+ eventHandlers[1].start=PWM_TIME_LOW;
+ eventHandlers[1].phase=PWM_PHASE;
+ eventHandlers[1].onEvent=&displayCurrentChar;
+ //Check for new frames from the serial.
+ eventHandlers[2].start=0L;
+ eventHandlers[2].phase=SERIAL_CHECK_PHASE;
+ eventHandlers[2].onEvent=&checkSerial;
+ //Read sensors.  We do this multiple times before we actually record a change.
+ eventHandlers[3].start=0L;
+ eventHandlers[3].phase=SENSOR_READ_PHASE;
+ eventHandlers[3].onEvent=&readTouchSensors; 
+ //Record sensor touch events, we do this less regularly than we read the sensor so as to reduce erroneous events.
+ eventHandlers[4].start=0L;
+ eventHandlers[4].phase=SENSOR_RECORD_EVENT_PHASE;
+ eventHandlers[4].onEvent=&recordSensorEvents;
+ //Send regular pings to host.
+ eventHandlers[5].start=0L;
+ eventHandlers[5].phase=PING_PHASE;
+ eventHandlers[5].onEvent=&sendPing;
+ //After initiallizing everything, we want to align our start offsets with the system clock.
+ time=micros();
+ for(int h=0;h<NUM_EVENT_HANDLERS;h++){
+  eventHandlers[h].next=eventHandlers[h].start+time;
+ }
+}

@@ -1,0 +1,11 @@
+To build:
+install ino from www.inotool.org
+
+Edit ino.ini to configure ino for your device.
+
+Download a version of the brltty sources which contain the UOBP driver.
+
+$./configure
+$make
+$make install
+

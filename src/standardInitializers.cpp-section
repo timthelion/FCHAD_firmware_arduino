@@ -1,0 +1,25 @@
+void setup(){
+  // initialize the serial communication:
+  Serial.begin(SERIAL_BAUD);
+  // initialize the the pins as outputs:
+  dot_display_init();
+  // initialize the touch sensors:
+  touchSensors=setupTouch();
+
+  initializeFrameHandlers();
+  //Events
+  initEventHandlers();
+}
+
+void loop() {
+ //loop body
+ time=micros();
+ for(int h=0;h<NUM_EVENT_HANDLERS;h++){
+  if(eventHandlers[h].next<=time){
+   while(eventHandlers[h].next<=time){
+    eventHandlers[h].next=eventHandlers[h].next+eventHandlers[h].phase;
+   }
+   if(eventHandlers[h].onEvent!=NULL)(eventHandlers[h].onEvent)();
+  }
+ }
+}

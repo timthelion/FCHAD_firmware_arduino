@@ -69,7 +69,7 @@ void recordSensorEvents(){
 
 void sendSensorChanges(){
  //Send change events.
- for(unsigned char i = 0; i<NUM_SENSORS;i++){
+ for(char i = NUM_SENSORS-1;i>=0;--i){
   if((touchSensors->touchSensorValues[i]>TOUCH_THRESHOLD)
                                  !=
                      touchSensors->touchStates[i]){

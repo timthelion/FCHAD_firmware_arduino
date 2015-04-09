@@ -8,9 +8,9 @@
 ///Initialization Frame
 ////Touch sensors
 //#define TEST_SENSORS
-#define SENSOR_READ_PHASE 500L
-#define SENSOR_RECORD_EVENT_PHASE 50000L
-#define TOUCH_THRESHOLD 2
+#define SENSOR_READ_PHASE 50L
+#define SENSOR_RECORD_EVENT_PHASE 60000L
+#define TOUCH_THRESHOLD 100
 #define NUM_SENSORS 12
 #define ANALOG_LINE A5
 #define SELECTOR_BITS 4
